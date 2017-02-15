@@ -17,8 +17,8 @@ export default class Task extends Component {
     // so that we can style them nicely in CSS
       const taskClassName = this.props.task.checked ? 'checked' : '';
 
-    return (
-      <li className={taskClassName}>
+      return (
+       <li className={taskClassName}>
         <button className="delete" onClick={this.deleteThisTask.bind(this)}>
           &times;
         </button>
@@ -30,7 +30,15 @@ export default class Task extends Component {
           onClick={this.toggleChecked.bind(this)}
         />
 
-        <span className="text">{this.props.task.text}</span>
+        { this.props.showPrivateButton ? (
+          <button className="toggle-private" onClick={this.togglePrivate.bind(this)}>
+            { this.props.task.private ? 'Private' : 'Public' }
+          </button>
+        ) : ''}
+
+        <span className="text">
+          <strong>{this.props.task.username}</strong> {this.props.task.text}
+        </span>
       </li>
     );
   }
